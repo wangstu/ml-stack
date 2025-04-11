@@ -3,6 +3,6 @@ namespace: default
 
 data:
 - key: snapshot-id
-  value: snap-10
+  value: snap-11
 - key: flavor
-  value: ecs.g3i.32xlarge
+  value: ecs.g3i.xlarge
