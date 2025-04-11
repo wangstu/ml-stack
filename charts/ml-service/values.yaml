@@ -1,0 +1,5 @@
+name: ml-service-config
+namespace: default
+
+key: snapshot-id
+value: snap-1
