@@ -4,4 +4,6 @@ metadata:
   name: {{ .Values.name }}
   namespace: {{ .Values.namespace }}
 data:
-  {{ .Values.key }}: {{ .Values.value }}
+  {{- range .Values.data }}
+  {{ .key }}: {{ .value }}
+  {{- end}}

@@ -1,5 +1,8 @@
 name: ml-service-config
 namespace: default
 
-key: snapshot-id
-value: snap-1
+data:
+- key: snapshot-id
+  value: snap-1
+- key: flavor
+  value: ecs.g3i.8xlarge
