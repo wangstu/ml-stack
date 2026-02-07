@@ -1,6 +1,6 @@
 Port 2222
 PermitRootLogin yes
-PasswordAuthentication no
+PasswordAuthentication yes
 ClientAliveInterval 60
 ClientAliveCountMax 60
 PermitUserEnvironment yes

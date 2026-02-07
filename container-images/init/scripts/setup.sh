@@ -1,3 +1,4 @@
+#!/bin/bash
 
 ROOT_BIN_PATH=/ml-stack-init/usr/bin
 
@@ -8,7 +9,13 @@ $ROOT_BIN_PATH/cat /proc/1/environ | $ROOT_BIN_PATH/tr '\0' '\n' > /root/.ssh/en
 $ROOT_BIN_PATH/mkdir -p /etc/ssh
 $ROOT_BIN_PATH/ssh-keygen -A
 
-echo ${SSH_PUBLIC_KEY} > /root/.ssh/authorized_keys
+if [ -n "${SSH_PUBLIC_KEY}" ]; then
+  echo -e ${SSH_PUBLIC_KEY} > /root/.ssh/authorized_keys
+fi
+
+if [ -n "${SSH_ROOT_PASSWORD}" ]; then
+  echo "root:${SSH_ROOT_PASSWORD}" | chpasswd
+fi
 
 $ROOT_BIN_PATH/sshd -D -f /ml-stack-init/ssh/sshd_config
 $ROOT_BIN_PATH/tail -f /dev/null

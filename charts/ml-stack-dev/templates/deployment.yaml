@@ -50,6 +50,11 @@ spec:
             configMapKeyRef:
               key: pubkey
               name: {{ .Values.ssh.name }}
+        - name: SSH_ROOT_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: password
+              name: {{ .Values.ssh.name }}
         ports:
         - name: {{ .Values.service.name }}
           containerPort: {{ .Values.service.port }}
