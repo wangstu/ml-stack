@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 680" font-family="'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <filter id="shadow" x="-4%" y="-4%" width="112%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.07"/>
+    </filter>
+    <filter id="shadow2" x="-6%" y="-6%" width="116%" height="116%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000" flood-opacity="0.10"/>
+    </filter>
+    <linearGradient id="clusterBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8faff"/><stop offset="100%" stop-color="#f0f4ff"/>
+    </linearGradient>
+    <linearGradient id="deployGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#eef3fc"/><stop offset="100%" stop-color="#e3ecf7"/>
+    </linearGradient>
+    <linearGradient id="initGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff8e1"/><stop offset="100%" stop-color="#ffecb3"/>
+    </linearGradient>
+    <linearGradient id="mainGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8f5e9"/><stop offset="100%" stop-color="#c8e6c9"/>
+    </linearGradient>
+    <linearGradient id="svcGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e3f2fd"/><stop offset="100%" stop-color="#bbdefb"/>
+    </linearGradient>
+    <linearGradient id="cmGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f3e5f5"/><stop offset="100%" stop-color="#e1bee7"/>
+    </linearGradient>
+    <marker id="arrow-gray" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#78909c"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ab47bc"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#42a5f5"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="680" rx="0" fill="#fafbfc"/>
+  <rect x="0" y="0" width="880" height="48" fill="#1a237e"/>
+  <text x="440" y="30" text-anchor="middle" font-size="16" font-weight="600" fill="#fff">ml-stack 架构图</text>
+
+  <rect x="24" y="66" width="832" height="590" rx="12" fill="url(#clusterBg)" stroke="#3b82f6" stroke-width="2" filter="url(#shadow2)"/>
+  <rect x="24" y="66" width="832" height="34" rx="12" fill="#3b82f6"/>
+  <rect x="24" y="86" width="832" height="14" fill="#3b82f6"/>
+  <text x="440" y="88" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">Kubernetes Cluster</text>
+
+  <rect x="52" y="118" width="440" height="510" rx="10" fill="url(#deployGrad)" stroke="#90caf9" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="52" y="118" width="440" height="30" rx="10" fill="#90caf9"/>
+  <rect x="52" y="134" width="440" height="14" fill="#90caf9"/>
+  <text x="272" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#1a237e">Deployment</text>
+
+  <rect x="80" y="160" width="384" height="52" rx="8" fill="url(#cmGrad)" stroke="#ce93d8" stroke-width="1.5"/>
+  <text x="272" y="180" text-anchor="middle" font-size="12" font-weight="600" fill="#6a1b9a">ConfigMap: ml-stack-dev-pubkey-config</text>
+  <text x="272" y="198" text-anchor="middle" font-size="11" fill="#7b1fa2">SSH_PUBLIC_KEY &amp; SSH_ROOT_PASSWORD → 环境变量</text>
+
+  <line x1="272" y1="212" x2="272" y2="466" stroke="#ab47bc" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow-purple)"/>
+  <rect x="200" y="328" width="144" height="20" rx="4" fill="#f3e5f5" opacity="0.85"/>
+  <text x="272" y="342" text-anchor="middle" font-size="10" fill="#7b1fa2">env from configMapRef</text>
+
+  <rect x="80" y="226" width="384" height="110" rx="8" fill="url(#initGrad)" stroke="#ffb74d" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="80" y="226" width="22" height="110" rx="8" fill="#ff9800"/>
+  <rect x="102" y="226" width="4" height="110" fill="#ff9800" opacity="0.3"/>
+  <text x="96" y="306" font-size="11" font-weight="700" fill="#fff" transform="rotate(-90,96,306)" text-anchor="middle" letter-spacing="2">INIT</text>
+  <text x="116" y="248" font-size="12" font-weight="700" fill="#e65100">ml-stack-init</text>
+  <text x="116" y="266" font-size="11" fill="#555">加载 Nix 预编译工具集（openssh, coreutils 等）</text>
+  <text x="116" y="284" font-size="11" fill="#555">拷贝到共享 EmptyDir 卷，供 Main 容器使用</text>
+  <text x="116" y="302" font-size="11" fill="#555">工具包: openssh, coreutils, supervisor, docker-cli</text>
+  <text x="116" y="320" font-size="10" fill="#888">镜像: wchstu/ml-stack-init:v1</text>
+
+  <line x1="272" y1="336" x2="272" y2="354" stroke="#78909c" stroke-width="2" marker-end="url(#arrow-gray)"/>
+
+  <rect x="100" y="360" width="160" height="38" rx="6" fill="#eceff1" stroke="#b0bec5" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="180" y="383" text-anchor="middle" font-size="11" font-weight="600" fill="#546e7a">EmptyDir: /nix/store/</text>
+  <rect x="284" y="360" width="160" height="38" rx="6" fill="#eceff1" stroke="#b0bec5" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="364" y="383" text-anchor="middle" font-size="11" font-weight="600" fill="#546e7a">EmptyDir: /ml-stack-init/</text>
+
+  <line x1="180" y1="398" x2="180" y2="416" stroke="#78909c" stroke-width="2" marker-end="url(#arrow-gray)"/>
+  <line x1="364" y1="398" x2="364" y2="416" stroke="#78909c" stroke-width="2" marker-end="url(#arrow-gray)"/>
+
+  <rect x="80" y="420" width="384" height="80" rx="8" fill="url(#mainGrad)" stroke="#66bb6a" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="80" y="420" width="22" height="80" rx="8" fill="#43a047"/>
+  <rect x="102" y="420" width="4" height="80" fill="#43a047" opacity="0.3"/>
+  <text x="96" y="485" font-size="11" font-weight="700" fill="#fff" transform="rotate(-90,96,485)" text-anchor="middle" letter-spacing="2">MAIN</text>
+  <text x="116" y="442" font-size="12" font-weight="700" fill="#1b5e20">主容器（任意镜像）</text>
+  <text x="116" y="460" font-size="11" fill="#555">运行 setup.sh → 配置环境 → 启动 sshd（端口 2222）</text>
+  <text x="116" y="478" font-size="10" fill="#888">示例: ubuntu, python, golang, nvidia/cuda ...</text>
+  <rect x="380" y="432" width="68" height="22" rx="11" fill="#43a047"/>
+  <text x="414" y="447" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">sshd:2222</text>
+
+  <rect x="520" y="118" width="308" height="200" rx="10" fill="url(#svcGrad)" stroke="#64b5f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="520" y="118" width="308" height="30" rx="10" fill="#64b5f6"/>
+  <rect x="520" y="134" width="308" height="14" fill="#64b5f6"/>
+  <text x="674" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#0d47a1">Service</text>
+  <rect x="540" y="160" width="268" height="80" rx="6" fill="#fff" stroke="#bbdefb" stroke-width="1"/>
+  <text x="674" y="180" text-anchor="middle" font-size="12" font-weight="700" fill="#1565c0">NodePort</text>
+  <text x="674" y="200" text-anchor="middle" font-size="11" fill="#555">节点端口 32222 → 容器端口 2222</text>
+  <text x="674" y="218" text-anchor="middle" font-size="11" fill="#888">协议: TCP | 名称: sshd</text>
+
+  <line x1="520" y1="460" x2="492" y2="460" stroke="#42a5f5" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <rect x="446" y="492" width="90" height="20" rx="4" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="491" y="506" text-anchor="middle" font-size="10" fill="#1565c0">selector: app=ml-stack-dev</text>
+
+  <rect x="520" y="350" width="308" height="60" rx="30" fill="#fff" stroke="#e0e0e0" stroke-width="2" stroke-dasharray="6,4" filter="url(#shadow)"/>
+  <text x="674" y="374" text-anchor="middle" font-size="14" font-weight="600" fill="#424242">👤 开发者（SSH 客户端）</text>
+  <text x="674" y="394" text-anchor="middle" font-size="11" fill="#757575">ssh root@&lt;节点IP&gt; -p 32222</text>
+
+  <line x1="674" y1="350" x2="674" y2="318" stroke="#78909c" stroke-width="2" marker-end="url(#arrow-gray)"/>
+  <rect x="570" y="326" width="80" height="18" rx="4" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="610" y="339" text-anchor="middle" font-size="10" fill="#555">SSH 连接</text>
+
+  <rect x="520" y="440" width="308" height="148" rx="10" fill="#fafafa" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="674" y="462" text-anchor="middle" font-size="12" font-weight="700" fill="#424242">图例</text>
+  <rect x="544" y="476" width="14" height="14" rx="3" fill="#ff9800"/>
+  <text x="566" y="488" font-size="11" fill="#555">Init Container — 构建时，加载 Nix 工具集</text>
+  <rect x="544" y="496" width="14" height="14" rx="3" fill="#43a047"/>
+  <text x="566" y="508" font-size="11" fill="#555">Main Container — 运行时，用户指定镜像</text>
+  <rect x="544" y="516" width="14" height="14" rx="3" fill="#ce93d8"/>
+  <text x="566" y="528" font-size="11" fill="#555">ConfigMap — 配置注入（环境变量）</text>
+  <rect x="544" y="536" width="14" height="14" rx="3" fill="#64b5f6"/>
+  <text x="566" y="548" font-size="11" fill="#555">Service — 网络暴露（NodePort）</text>
+  <line x1="544" y1="560" x2="576" y2="560" stroke="#78909c" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="586" y="564" font-size="11" fill="#555">EmptyDir 卷挂载 / 数据流</text>
+
+  <text x="272" y="662" text-anchor="middle" font-size="10" fill="#999">Pod 标签: app=ml-stack-dev | 命名空间: default</text>
+</svg>

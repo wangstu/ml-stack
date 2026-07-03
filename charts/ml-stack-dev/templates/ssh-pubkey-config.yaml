@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  password: {{ .Values.ssh.password }}
+  pubkey: {{ .Values.ssh.pubkey }}
+kind: ConfigMap
+metadata:
+  labels:
+    app: {{ .Values.name }}
+  name: {{ .Values.ssh.name }}
+  namespace: {{ .Values.namespace }}
