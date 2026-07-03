@@ -5,7 +5,7 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+    flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
@@ -14,7 +14,7 @@
         name = "ml-stack-init";
         paths = with pkgs; [
           openssh
-          supervisor
+          python3Packages.supervisor
           inotify-tools
           docker
           unzip
